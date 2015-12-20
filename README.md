@@ -29,41 +29,79 @@ module.exports = User;
 
 ### Methods
 
+The base Cannery Adapter is an extendable class that can be used to create various strategies for retrieving and setting data. We plan to open-source many of our adapters for data sources like Ajax, WebSockets, Mocking, MongoDB, etc, but we wrote the adapter in such a way that it is pluggable and intended to be overridden with custom logic for specific use-cases. 
+
 Every Cannery adapter has the following methods:
 
-#### create (:data)
+##### create(data)
 
-Create a new instance of a model.
+Send data to a data store to get created. This must accept an object to send to the data store.
 
-Returns a promise which resolves to an object with the newly saved data.
+```
+create (data) {
+    return new Promise((resolve, reject) {
+        // Save the data and resolve or reject the promise
+    });
+}
+```
 
-#### destroy (:id)
+Returns: A promise, which resolves with the newly created data
 
-Destroy and instance of a model.
+##### destroy(id)
 
-Returns a promise.
+Remove data from a data store.
 
-#### findAll (:query)
+```
+destroy (id) {
+    return new Promise((resolve, reject) {
+        // Delete the data and resolve or reject the promise
+    });
+}
+```
 
-Find all instances of a Model and resolve an array.
+Returns: A promise
 
-Returns a promise which resolves to an array.
+##### findAll(query)
 
-#### findOne (:id)
+Find all of the data for a model.
 
-Find a single instance of a model by ID.
+```
+findAll ({ page, per }) {
+    return new Promise((resolve, reject) {
+        // Retrieve the data and resolve or reject the promise
+    });
+}
+```
 
-Returns a promise which resolves to an object.
+Returns: A promise with an array of data
 
-#### getModel ()
+##### findOne(id)
 
-Return the model instance. You should not need to overwrite this.
+Find one record.
 
-#### update (:id, :data)
+```
+findOne (id) {
+    return new Promise((resolve, reject) {
+        // Retrieve the data and resolve or reject the promise
+    });
+}
+```
 
-Updates an instance of a model.
+Returns: A promise with an object of data
 
-Return a promise which resolves to an object with the newly saved data.
+##### update(id, data)
+
+Updates the data for a model
+
+```
+update (id, data) {
+    return new Promise((resolve, reject) {
+        // Save the data and resolve or reject the promise
+    });
+}
+```
+
+Returns: A promise with the object of updated data
 
 ## Contributing
 
