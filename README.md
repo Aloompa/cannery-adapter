@@ -1,10 +1,69 @@
 ## Welcome to cannery-adapter
 
-The base adapter for Cannery.
+The base adapter for [Cannery](http://github.com/Aloompa/cannery).
 
 ## API
 
-Coming soon.
+The Cannery Adapter is meant to be extended. There are just a handful of methods that can be overwritten to allow you to get and set data from whatever storage mechanism you like.
+
+Adding an adapter to you model is as trivial as adding it as a static property to your model:
+
+```
+const Cannery = require('cannery');
+const CanneryAdapter = require('cannery-adapter');
+
+class User extends Cannery.Model {
+
+    static adapter = CanneryAdapter;
+
+    getFields () {
+        return {
+            // ...
+        };
+    }
+
+}
+
+module.exports = User;
+```
+
+### Methods
+
+Every Cannery adapter has the following methods:
+
+#### create (:data)
+
+Create a new instance of a model.
+
+Returns a promise which resolves to an object with the newly saved data.
+
+#### destroy (:id)
+
+Destroy and instance of a model.
+
+Returns a promise.
+
+#### findAll (:query)
+
+Find all instances of a Model and resolve an array.
+
+Returns a promise which resolves to an array.
+
+#### findOne (:id)
+
+Find a single instance of a model by ID.
+
+Returns a promise which resolves to an object.
+
+#### getModel ()
+
+Return the model instance. You should not need to overwrite this.
+
+#### update (:id, :data)
+
+Updates an instance of a model.
+
+Return a promise which resolves to an object with the newly saved data.
 
 ## Contributing
 
